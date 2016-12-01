@@ -1,7 +1,5 @@
 package com.example.administrator.weatherdemo.ui.activity;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,9 +7,6 @@ import android.widget.Button;
 
 import com.example.administrator.weatherdemo.R;
 
-import java.util.List;
-
-import javax.inject.Inject;
 
 public class NextActivity extends BaseActivity {
 
