@@ -1,4 +1,4 @@
-package com.example.administrator.weatherdemo.ui.activity;
+package com.example.administrator.weatherdemo.mvp.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 public abstract class BaseActivity extends AppCompatActivity {
     @Inject
-    List<Activity> mActivities;
+    public List<Activity> mActivities;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,10 +30,16 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .build()
                 .inject(this);
         mActivities.add(this);
-        onActivituCreate(savedInstanceState);
+        onActivityCreate(savedInstanceState);
+        initView();
+        initListener();
     }
 
-    public abstract void onActivituCreate(Bundle savedInstanceState);
+    protected abstract void initView();
+
+    protected abstract void initListener();
+
+    public abstract void onActivityCreate(Bundle savedInstanceState);
 
     @Override
     protected void onDestroy() {

@@ -1,4 +1,4 @@
-package com.example.administrator.weatherdemo.ui.activity;
+package com.example.administrator.weatherdemo.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,7 @@ public class NextActivity extends BaseActivity {
 
 
     @Override
-    public void onActivituCreate(Bundle savedInstanceState) {
+    public void onActivityCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_next);
         mButton = (Button) findViewById(R.id.show);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -25,4 +25,15 @@ public class NextActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
 }

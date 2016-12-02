@@ -8,13 +8,13 @@
     android:orientation="vertical"
     tools:context="com.example.administrator.weatherdemo.MainActivity">
 
-    <android.support.v4.view.ViewPager
+    <com.example.administrator.weatherdemo.customView.NoScrollViewPager
         android:id="@+id/vp_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </android.support.v4.view.ViewPager>
+    </com.example.administrator.weatherdemo.customView.NoScrollViewPager>
 
     <LinearLayout
         android:id="@+id/bottom_container"

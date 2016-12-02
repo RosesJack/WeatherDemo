@@ -1,14 +1,18 @@
-package com.example.administrator.weatherdemo.ui.fragment;
+package com.example.administrator.weatherdemo.mvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.weatherdemo.App;
+import com.example.administrator.weatherdemo.factory.FragmentFactory;
+import com.example.administrator.weatherdemo.module.bean.WeatherInfoBean;
+
+import static android.R.attr.data;
 
 /**
  * auther：wzy
@@ -17,9 +21,19 @@ import com.example.administrator.weatherdemo.App;
  */
 
 public class HomeFragment extends BaseFragment {
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(container.getContext());
         textView.setText(this.getClass().getSimpleName());
         return textView;

@@ -1,4 +1,4 @@
-package com.example.administrator.weatherdemo.present;
+package com.example.administrator.weatherdemo.mvp.present;
 
 /**
  * auther：wzy
@@ -7,5 +7,5 @@ package com.example.administrator.weatherdemo.present;
  */
 
 public interface MainPresentInt {
-    
+    void showViewPager();
 }

@@ -1,6 +1,7 @@
 package com.example.administrator.weatherdemo.module.bean;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -10,7 +11,7 @@ import java.util.List;
  * desc:
  */
 
-public class WeatherInfoBean {
+public class WeatherInfoBean implements Serializable {
 
     private List<Result> results;
 

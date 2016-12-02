@@ -1,8 +1,7 @@
 package com.example.administrator.weatherdemo.component;
 
-import com.example.administrator.weatherdemo.MainActivity;
 import com.example.administrator.weatherdemo.annotation.ActivityScope;
-import com.example.administrator.weatherdemo.ui.activity.BaseActivity;
+import com.example.administrator.weatherdemo.mvp.ui.activity.BaseActivity;
 
 import dagger.Component;
 

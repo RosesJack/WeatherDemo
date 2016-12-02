@@ -1,4 +1,4 @@
-package com.example.administrator.weatherdemo.ui.fragment;
+package com.example.administrator.weatherdemo.mvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +13,21 @@ import android.widget.TextView;
  * desc:
  */
 
-public class SettingFragment extends BaseFragment {
-    @Nullable
+public class TitleFragment extends BaseFragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(container.getContext());
         textView.setText(this.getClass().getSimpleName());
         return textView;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 }

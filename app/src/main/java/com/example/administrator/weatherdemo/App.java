@@ -21,7 +21,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = getContext();
+        mContext = getApplicationContext();
         mActivityListComponent = DaggerActivityListComponent.create();
     }
 
