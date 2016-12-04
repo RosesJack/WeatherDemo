@@ -7,8 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.administrator.weatherdemo.App;
 import com.example.administrator.weatherdemo.R;
 import com.example.administrator.weatherdemo.module.bean.Result;
 import com.example.administrator.weatherdemo.module.bean.WeatherInfoBean;
@@ -30,6 +34,11 @@ public class HomeFragment extends BaseFragment implements HomeFraInt {
     private TextView mWeather;
     private EditText mMInputCityName;
     private Button mRefresh;
+    private FrameLayout mProgress;
+    private FrameLayout mErrorView;
+    private View mHomeContainer;
+    private LinearLayout mSuccessView;
+    private TextView mRetry;
 
     @Override
     protected void initView() {
@@ -45,17 +54,28 @@ public class HomeFragment extends BaseFragment implements HomeFraInt {
                 mHomeFraPresent.refreshFragmentView();
             }
         });
+
+        mRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHomeFraPresent.refreshFragmentView();
+            }
+        });
     }
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, null);
-        mCity = (TextView) view.findViewById(R.id.city);
-        mTime = (TextView) view.findViewById(R.id.time);
-        mWeather = (TextView) view.findViewById(R.id.weather);
-        mMInputCityName = (EditText) view.findViewById(R.id.input_city_name);
-        mRefresh = (Button) view.findViewById(R.id.refresh);
-        return view;
+        mHomeContainer = inflater.inflate(R.layout.fragment_home, null);
+        mCity = (TextView) mHomeContainer.findViewById(R.id.city);
+        mTime = (TextView) mHomeContainer.findViewById(R.id.time);
+        mRetry = (TextView) mHomeContainer.findViewById(R.id.retry_tx);
+        mWeather = (TextView) mHomeContainer.findViewById(R.id.weather);
+        mMInputCityName = (EditText) mHomeContainer.findViewById(R.id.input_city_name);
+        mRefresh = (Button) mHomeContainer.findViewById(R.id.refresh);
+        mProgress = (FrameLayout) mHomeContainer.findViewById(R.id.progress);
+        mSuccessView = (LinearLayout) mHomeContainer.findViewById(R.id.sucess_view);
+        mErrorView = (FrameLayout) mHomeContainer.findViewById(R.id.error_view);
+        return mHomeContainer;
     }
 
     @Override
@@ -78,5 +98,32 @@ public class HomeFragment extends BaseFragment implements HomeFraInt {
     @Override
     public String getCityName() {
         return mMInputCityName.getText().toString().trim();
+    }
+
+    @Override
+    public void showProgress() {
+        mProgress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showErrorView() {
+        mSuccessView.setVisibility(View.GONE);
+        mErrorView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showSuccessView() {
+        mSuccessView.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showToast() {
+        Toast.makeText(App.getContext(), "不能为空", Toast.LENGTH_SHORT).show();
     }
 }

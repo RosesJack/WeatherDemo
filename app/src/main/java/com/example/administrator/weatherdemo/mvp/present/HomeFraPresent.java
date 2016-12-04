@@ -43,22 +43,31 @@ public class HomeFraPresent {
     public void refreshFragmentView() {
         String cityName = mHomeFraInt.getCityName();
         if (TextUtils.isEmpty(cityName)) {
+            mHomeFraInt.showToast();
             return;
         }
+        mHomeFraInt.showProgress();
         mHomeFraModel.getDataFromServer(new Callback<WeatherInfoBean>() {
             @Override
             public void onResponse(Call<WeatherInfoBean> call, Response<WeatherInfoBean> response) {
                 WeatherInfoBean data = response.body();
-                Log.i(TAG, "onResponse: "+data.toString());
                 Message msg = Message.obtain();
                 msg.obj = data;
                 mHandler.sendMessage(msg);
+                mHomeFraInt.hideProgress();
+                if (data == null || data.getResults() == null || data.getResults().size() <= 0) {
+                    mHomeFraInt.showErrorView();
+                } else {
+                    mHomeFraInt.showSuccessView();
+                }
             }
 
             @Override
             public void onFailure(Call<WeatherInfoBean> call, Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(App.getContext(), "网络出现异常", Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.getContext(), "网络出现异常,请稍微重试", Toast.LENGTH_SHORT).show();
+                mHomeFraInt.hideProgress();
+                mHomeFraInt.showErrorView();
             }
         }, cityName);
     }

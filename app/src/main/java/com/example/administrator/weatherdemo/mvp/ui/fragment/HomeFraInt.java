@@ -13,4 +13,14 @@ public interface HomeFraInt {
     void refreshViewWithData(WeatherInfoBean data);
 
     String getCityName();
+
+    void showProgress();
+
+    void hideProgress();
+
+    void showErrorView();
+
+    void showSuccessView();
+
+    void showToast();
 }
