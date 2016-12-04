@@ -1,18 +1,19 @@
 package com.example.administrator.weatherdemo.mvp.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.administrator.weatherdemo.App;
-import com.example.administrator.weatherdemo.factory.FragmentFactory;
+import com.example.administrator.weatherdemo.R;
+import com.example.administrator.weatherdemo.module.bean.Result;
 import com.example.administrator.weatherdemo.module.bean.WeatherInfoBean;
+import com.example.administrator.weatherdemo.mvp.present.HomeFraPresent;
 
-import static android.R.attr.data;
 
 /**
  * auther：wzy
@@ -20,7 +21,15 @@ import static android.R.attr.data;
  * desc:
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeFraInt {
+
+    private HomeFraPresent mHomeFraPresent = new HomeFraPresent(this);
+    private String TAG = this.getClass().getSimpleName();
+    private TextView mCity;
+    private TextView mTime;
+    private TextView mWeather;
+    private EditText mMInputCityName;
+    private Button mRefresh;
 
     @Override
     protected void initView() {
@@ -29,13 +38,45 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-
+        mRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick: 点击了");
+                mHomeFraPresent.refreshFragmentView();
+            }
+        });
     }
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TextView textView = new TextView(container.getContext());
-        textView.setText(this.getClass().getSimpleName());
-        return textView;
+        View view = inflater.inflate(R.layout.fragment_home, null);
+        mCity = (TextView) view.findViewById(R.id.city);
+        mTime = (TextView) view.findViewById(R.id.time);
+        mWeather = (TextView) view.findViewById(R.id.weather);
+        mMInputCityName = (EditText) view.findViewById(R.id.input_city_name);
+        mRefresh = (Button) view.findViewById(R.id.refresh);
+        return view;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        mHomeFraPresent.refreshFragmentView();
+    }
+
+    @Override
+    public void refreshViewWithData(WeatherInfoBean data) {
+        if (data == null || data.getResults() == null || data.getResults().size() <= 0) {
+            return;
+        }
+        Result result = data.getResults().get(0);
+        mTime.setText(result.getLastUpdate());
+        mWeather.setText(result.getNow().getText());
+        mCity.setText(result.getLocation().getName());
+        Log.i(TAG, "刷新了页面~~ " + data.toString());
+    }
+
+    @Override
+    public String getCityName() {
+        return mMInputCityName.getText().toString().trim();
     }
 }

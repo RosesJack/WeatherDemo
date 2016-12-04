@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
     private View rootView;
     private String TAG = this.getClass().getSimpleName();
-
+    private boolean isCreateView = false;
 
     @Nullable
     @Override
@@ -28,6 +28,7 @@ public abstract class BaseFragment extends Fragment {
             initView();
             initListener();
         }
+        isCreateView = true;
         return rootView;
     }
 
@@ -40,7 +41,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
+        if (isVisibleToUser && isCreateView) {
             //Fragment可见
             lazyLoad();
         } else {

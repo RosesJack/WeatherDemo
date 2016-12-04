@@ -69,6 +69,15 @@ public class Result {
         this.now = now;
     }
 
+
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public String getLastUpdate() {
+        return lastUpdate;
+    }
+
     @Override
     public String toString() {
         return "Result{" +

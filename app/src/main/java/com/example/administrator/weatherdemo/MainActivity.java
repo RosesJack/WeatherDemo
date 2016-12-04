@@ -1,13 +1,9 @@
 package com.example.administrator.weatherdemo;
 
 import android.graphics.Color;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,30 +72,7 @@ public class MainActivity extends BaseActivity implements MainPresentInt {
     }
 
 
-    public static void getDataFromServer() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.thinkpage.cn/v3/weather/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        /*
-  //https://api.thinkpage.cn/v3/weather/now.json?key=zrmqhnpyglbj3nob&location=beijing&language=zh-Hans&unit=c
-         */
-        RequestWeatherInterface requestWeather = retrofit.create(RequestWeatherInterface.class);
-        retrofit2.Call<WeatherInfoBean> call = requestWeather.getWeatherInfo("zrmqhnpyglbj3nob", "beijing", "zh-Hans", "c");
-        call.enqueue(new Callback<WeatherInfoBean>() {
-            @Override
-            public void onResponse(retrofit2.Call<WeatherInfoBean> call, Response<WeatherInfoBean> response) {
-                WeatherInfoBean body = response.body();
-                Log.i(TAG, "相应结果:" + body);
-            }
 
-            @Override
-            public void onFailure(retrofit2.Call<WeatherInfoBean> call, Throwable t) {
-
-            }
-        });
-
-    }
 
     @Override
     protected void initView() {
