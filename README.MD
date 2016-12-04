@@ -1,0 +1,1 @@
+尝试用mvp实现一个简单的页面，显示天气，Fragment与ViewPager结合使用
